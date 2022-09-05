@@ -1,0 +1,36 @@
+server:
+  port: 5001
+
+spring:
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://localhost:3306/craproject?createDatabaseIfNotExist=true
+    username: root
+    password: hydatis
+
+
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: craprojet
+
+
+  kafka:
+    bootstrap-servers:
+      - localhost:9092
+    consumer:
+      group-id: project-group
+      enable-auto-commit: false
+      auto-offset-reset: latest
+      isolation-level: read_committed
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer

@@ -1,0 +1,9 @@
+docker network create --attachable -d bridge pj
+
+docker-compose up -d
+
+ docker run -it -d --name mongo-container -p 27017:27017 --network pj --restart always -v mongodb_data_container:/data/db mongo:latest       
+
+docker run -it -d --name mysql-container -p 3306:3306 --network pj -e MYSQL_ROOT_PASSWORD=hydatis --restart always -v mysql_data_container:/var/lib/mysql mysql:latest
+
+docker run -it -d --name adminer -p 8086:8086 --network pj -e ADMINER_DEFAULT_SERVER=mysql-container --restart always adminer:latest
